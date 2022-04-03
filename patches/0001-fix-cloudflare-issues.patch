@@ -28,3 +28,16 @@ index f013ac08..3bcc78d8 100644
          }
  
          return json_decode($response->getBody()->__toString(), true);
+diff --git a/app/Repositories/Wings/DaemonServerRepository.php b/app/Repositories/Wings/DaemonServerRepository.php
+index 3bcc78d8..0e24f2c4 100644
+--- a/app/Repositories/Wings/DaemonServerRepository.php
++++ b/app/Repositories/Wings/DaemonServerRepository.php
+@@ -41,7 +41,7 @@ class DaemonServerRepository extends DaemonRepository
+                      "disk_bytes" => 0
+                   ]
+             ];
+-            return jayParsedAry;
++            return $jayParsedAry;
+         }
+ 
+         return json_decode($response->getBody()->__toString(), true);
