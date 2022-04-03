@@ -41,7 +41,7 @@ class DaemonServerRepository extends DaemonRepository
                      "disk_bytes" => 0
                   ]
             ];
-            return jayParsedAry;
+            return $jayParsedAry;
         }
 
         return json_decode($response->getBody()->__toString(), true);
