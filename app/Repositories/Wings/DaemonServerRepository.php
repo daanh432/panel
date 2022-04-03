@@ -24,7 +24,24 @@ class DaemonServerRepository extends DaemonRepository
                 sprintf('/api/servers/%s', $this->server->uuid)
             );
         } catch (TransferException $exception) {
-            throw new DaemonConnectionException($exception, false);
+            // Somehow returning a mockup prevents the ocasional 503 Cloudflare errors when a node is offline.
+            $jayParsedAry = [
+               "state" => "unknown",
+               "is_suspended" => false,
+               "utilization" => [
+                     "memory_bytes" => 0,
+                     "memory_limit_bytes" => 0,
+                     "cpu_absolute" => 0,
+                     "network" => [
+                        "rx_bytes" => 0,
+                        "tx_bytes" => 0
+                     ],
+                     "uptime" => 0,
+                     "state" => "offline",
+                     "disk_bytes" => 0
+                  ]
+            ];
+            return jayParsedAry;
         }
 
         return json_decode($response->getBody()->__toString(), true);
